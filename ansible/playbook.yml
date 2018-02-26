@@ -1,1 +1,10 @@
 ---
+- hosts: "{{ target_hosts }}"
+  vars_files:
+    - ./vars/main.yml
+  tasks:
+    - name: Include Fedora specific tasks
+      include: fedora.yml
+    - name: Include RHEL specific tasks
+      include: rhel.yml
+      
