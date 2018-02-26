@@ -7,4 +7,10 @@
       include_tasks: setup.yml
       tags:
         - deploy
-      
+    - name: Restart and enable if needed
+      service:
+        name: rundeck
+        state: restarted
+        enabled: yes
+      tags:
+        - deploy 
