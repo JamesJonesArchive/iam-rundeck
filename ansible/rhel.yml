@@ -1,1 +1,11 @@
 ---
+- name: Add Some repo
+  yum_repository:
+    name: "{{ rundeckrepo.name }}"
+    description: "{{ rundeckrepo.name }}"
+    baseurl: "{{ rundeckrepo.baseurl }}"
+    gpgkey: http://server.com/keys/somerepo.pub
+    gpgcheck: "{{ rundeckrepo.gpgcheck }}"
+    repo_gpgcheck: "{{ rundeckrepo.repo_gpgcheck }}"
+    enabled: "{{ rundeckrepo.enabled }}"
+

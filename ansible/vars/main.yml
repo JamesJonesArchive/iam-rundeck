@@ -2,6 +2,6 @@
 rundeckrepo:
   name: bintray-rundeck-rundeck-rpm
   baseurl: https://rundeck.bintray.com/rundeck-rpm
-  gpgcheck: 0
-  repo_gpgcheck: 0
-  enabled: 1
+  gpgcheck: no
+  repo_gpgcheck: no
+  enabled: yes
