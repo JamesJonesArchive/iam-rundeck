@@ -1,0 +1,9 @@
+---
+- src: ssh://git@github.com/USF-IT/cims-ansible-inventory.git
+  version: develop
+  scm: git
+  name: inventory
+- src: ssh://git@github.com/USF-IT/idm-ansible-common.git
+  version: develop
+  scm: git
+  name: common
