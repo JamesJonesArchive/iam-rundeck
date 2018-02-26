@@ -1,0 +1,9 @@
+---
+- name: Update rundeck-config.properties
+  template:
+    src: "../templates/etc/rundeck/rundeck-config.properties.j2"
+    dest: /etc/rundeck/rundeck-config.properties
+    mode: 0640
+    owner: rundeck
+    group: rundeck
+    backup: no
