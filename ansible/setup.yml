@@ -1,0 +1,13 @@
+---
+- name: Add Rundeck Repo
+  yum_repository:
+    name: "{{ rundeckrepo.name }}"
+    description: "{{ rundeckrepo.name }}"
+    baseurl: "{{ rundeckrepo.baseurl }}"
+    gpgcheck: "{{ rundeckrepo.gpgcheck }}"
+    repo_gpgcheck: "{{ rundeckrepo.repo_gpgcheck }}"
+    enabled: "{{ rundeckrepo.enabled }}"
+- name: install the latest version of rundeck
+  package:
+    name: rundeck
+    state: latest

@@ -3,18 +3,8 @@
   vars_files:
     - ./vars/main.yml
   tasks:
-    - name: Add Rundect Repo
-      yum_repository:
-        name: "{{ rundeckrepo.name }}"
-        description: "{{ rundeckrepo.name }}"
-        baseurl: "{{ rundeckrepo.baseurl }}"
-        gpgcheck: "{{ rundeckrepo.gpgcheck }}"
-        repo_gpgcheck: "{{ rundeckrepo.repo_gpgcheck }}"
-        enabled: "{{ rundeckrepo.enabled }}"
-    - name: Include Fedora specific tasks
-      include_tasks: fedora.yml
-      when: ansible_distribution == 'Fedora'
-    - name: Include RHEL specific tasks
-      include_tasks: rhel.yml
-      when: ansible_distribution == 'Red Hat Enterprise Linux' and ansible_lsb.major_release|int <= 7
+    - name: Setup the RunDeck via YUM/DNF
+      include_tasks: setup.yml
+      tags:
+        - deploy
       
