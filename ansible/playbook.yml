@@ -9,7 +9,7 @@
         - deploy
     - name: Restart and enable if needed
       service:
-        name: rundeck
+        name: rundeckd
         state: restarted
         enabled: yes
       tags:
