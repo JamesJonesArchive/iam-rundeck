@@ -1,6 +1,5 @@
 node('master') {
   env.JAVA_HOME = tool 'jdk8'
-  def mvnHome = tool 'maven3'
 
   env.PATH = "${env.JENKINS_HOME}/bin:${env.PATH}"
   checkout scm
