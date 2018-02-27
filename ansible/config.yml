@@ -45,6 +45,9 @@
     owner: rundeck
     group: rundeck
     backup: no
+- set_fact:
+    rundeck_server_uuid: "{{ lookup('ini', 'rundeck.server.uuid type=properties file=framework.properties') }}"
+- debug: msg="{{ rundeck_server_uuid }}"
 - name: Update framework.properties
   template:
     src: "../templates/etc/rundeck/framework.properties.j2"
