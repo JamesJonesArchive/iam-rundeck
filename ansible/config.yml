@@ -31,3 +31,17 @@
     owner: rundeck
     group: rundeck
     backup: no
+- name: Remove PKCS12 file
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /etc/rundeck/ssl/keystore.p12
+- file:
+    path: "{{ item }}"
+    owner: rundeck
+    group: rundeck
+    mode: 0644
+  with_items:
+    - /etc/rundeck/ssl/keystore
+    - /etc/rundeck/ssl/truststore
