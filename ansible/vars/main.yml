@@ -5,3 +5,5 @@ rundeckrepo:
   gpgcheck: no
   repo_gpgcheck: no
   enabled: yes
+rundeckstore:
+  defaultstorepassword: adminadmin

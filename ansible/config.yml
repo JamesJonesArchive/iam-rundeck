@@ -13,21 +13,21 @@
     state: absent
   with_items:
     - /etc/rundeck/ssl/keystore
+    - /etc/rundeck/ssl/truststore
     - /etc/rundeck/ssl/keystore.p12
 - name: Create a pkcs12 keystore
-  command: "openssl pkcs12 -export -name rundeck -in /etc/pki/tls/certs/{{ ansible_fqdn | replace('.', '_') }}.crt -inkey /etc/pki/tls/private/{{ ansible_fqdn | replace('.', '_') }}.key -out /etc/rundeck/ssl/keystore.p12 -passout pass:adminadmin"
+  command: "openssl pkcs12 -export -name rundeck -in /etc/pki/tls/certs/{{ ansible_fqdn | replace('.', '_') }}.crt -inkey /etc/pki/tls/private/{{ ansible_fqdn | replace('.', '_') }}.key -out /etc/rundeck/ssl/keystore.p12 -passout pass:{{ rundeckstore.defaultstorepassword }}"
 # Create PKCS12 keystore from private key and public certificate.
-- name: Import PKCS12 keystore and build a keystore
-  command: "keytool -importkeystore -deststorepass adminadmin -destkeypass adminadmin -destkeystore /etc/rundeck/ssl/keystore -srckeystore /etc/rundeck/ssl/keystore.p12 -srcstoretype PKCS12 -srcstorepass adminadmin -alias rundeck"
-#- name: Import a cert with a specified alias, create it if it doesn't exist
-#  java_cert:
-#    pkcs12_path: "/etc/cas/keystore.p12"
-#    pkcs12_password: changeit
-#    pkcs12_alias: cas
-#    # cert_path: "/etc/pki/tls/certs/{{ ansible_fqdn | replace('.', '_') }}.crt"
-#    cert_alias: cas
-#    keystore_path: /etc/cas/keystore
-#    keystore_pass: changeit
-#    keystore_create: yes
-#    executable: /usr/local/lib/usf-cas/jdk8/bin/keytool
-#    state: present
+- name: Import PKCS12 keystore and build a keystore and truststore
+  command: "keytool -importkeystore -deststorepass {{ rundeckstore.defaultstorepassword }} -destkeypass {{ rundeckstore.defaultstorepassword }} -destkeystore {{ item }} -srckeystore /etc/rundeck/ssl/keystore.p12 -srcstoretype PKCS12 -srcstorepass {{ rundeckstore.defaultstorepassword }} -alias rundeck"
+  with_items:
+    - /etc/rundeck/ssl/keystore
+    - /etc/rundeck/ssl/truststore
+- name: Update ssl.properties
+  template:
+    src: "../templates/etc/rundeck/ssl/ssl.properties.j2"
+    dest: /etc/rundeck/ssl/ssl.properties
+    mode: 0640
+    owner: rundeck
+    group: rundeck
+    backup: no
