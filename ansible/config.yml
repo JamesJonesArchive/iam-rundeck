@@ -46,7 +46,7 @@
     group: rundeck
     backup: no
 - set_fact:
-    rundeck_server_uuid: "{{ lookup('ini', 'rundeck.server.uuid type=properties file=framework.properties') }}"
+    rundeck_server_uuid: "{{ lookup('ini', 'rundeck.server.uuid type=properties file=/etc/rundeck/framework.properties') }}"
 - debug: msg="{{ rundeck_server_uuid }}"
 - name: Update framework.properties
   template:
