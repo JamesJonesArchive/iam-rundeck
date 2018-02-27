@@ -1,12 +1,4 @@
 ---
-- name: Update rundeck-config.properties
-  template:
-    src: "../templates/etc/rundeck/rundeck-config.properties.j2"
-    dest: /etc/rundeck/rundeck-config.properties
-    mode: 0640
-    owner: rundeck
-    group: rundeck
-    backup: no
 - name: Remove keystore (if exists)
   file:
     path: "{{ item }}"
@@ -23,14 +15,6 @@
   with_items:
     - /etc/rundeck/ssl/keystore
     - /etc/rundeck/ssl/truststore
-- name: Update ssl.properties
-  template:
-    src: "../templates/etc/rundeck/ssl/ssl.properties.j2"
-    dest: /etc/rundeck/ssl/ssl.properties
-    mode: 0640
-    owner: rundeck
-    group: rundeck
-    backup: no
 - name: Remove PKCS12 file
   file:
     path: "{{ item }}"
@@ -45,3 +29,28 @@
   with_items:
     - /etc/rundeck/ssl/keystore
     - /etc/rundeck/ssl/truststore
+- name: Update rundeck-config.properties
+  template:
+    src: "../templates/etc/rundeck/rundeck-config.properties.j2"
+    dest: /etc/rundeck/rundeck-config.properties
+    mode: 0640
+    owner: rundeck
+    group: rundeck
+    backup: no
+- name: Update ssl.properties
+  template:
+    src: "../templates/etc/rundeck/ssl/ssl.properties.j2"
+    dest: /etc/rundeck/ssl/ssl.properties
+    mode: 0640
+    owner: rundeck
+    group: rundeck
+    backup: no
+- name: Update framework.properties
+  template:
+    src: "../templates/etc/rundeck/framework.properties.j2"
+    dest: /etc/rundeck/framework.properties
+    mode: 0640
+    owner: rundeck
+    group: rundeck
+    backup: no
+
