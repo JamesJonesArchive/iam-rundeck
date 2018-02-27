@@ -53,4 +53,9 @@
     owner: rundeck
     group: rundeck
     backup: no
-
+- name: Update Environment variables to turn SSL on
+  template:
+    src: "../templates/etc/sysconfig/rundeckd.j2"
+    dest: /etc/sysconfig/rundeckd
+    mode: 0644
+    backup: no
