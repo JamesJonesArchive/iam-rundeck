@@ -46,7 +46,7 @@
     group: rundeck
     backup: no
 - name: Get the uuid
-  shell: "sed '/^\#/d' /etc/rundeck/framework.properties | grep 'rundeck.server.uuid' | sed 's/^.*=\s//'"
+  shell: sed '/^\#/d' /etc/rundeck/framework.properties | grep 'rundeck.server.uuid' | sed 's/^.*=\s//'
   register: uuid_result
 # - set_fact:
 #    rundeck_server_uuid: "{{ lookup('ini', 'rundeck.server.uuid type=properties file=/etc/rundeck/framework.properties') }}"
