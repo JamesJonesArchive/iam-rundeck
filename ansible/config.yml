@@ -1,4 +1,10 @@
 ---
+- name: Generate random password
+  shell: date +%s | sha256sum | base64 | head -c 32 ; echo
+  register: random_result
+- debug: msg="{{ random_result.stdout }}"
+- set_fact:
+    rundeck_key_password: "{{ random_result.stdout }}"
 - name: Remove keystore (if exists)
   file:
     path: "{{ item }}"
@@ -48,12 +54,8 @@
 - name: Get the uuid
   shell: sed '/^\#/d' /etc/rundeck/framework.properties | grep 'rundeck.server.uuid' | sed 's/^.*=\s//'
   register: uuid_result
-- name: Generate random password
-  shell: date +%s | sha256sum | base64 | head -c 32 ; echo
-  register: random_result
 - set_fact:
     rundeck_server_uuid: "{{ uuid_result.stdout }}"
-- debug: msg="{{ random_result }}"
 - name: Update framework.properties
   template:
     src: "../templates/etc/rundeck/framework.properties.j2"
