@@ -45,9 +45,12 @@
     owner: rundeck
     group: rundeck
     backup: no
-- set_fact:
-    rundeck_server_uuid: "{{ lookup('ini', 'rundeck.server.uuid type=properties file=/etc/rundeck/framework.properties') }}"
-- debug: msg="{{ rundeck_server_uuid }}"
+- name: Get the uuid
+  shell: "sed '/^\#/d' /etc/rundeck/framework.properties | grep 'rundeck.server.uuid' | sed 's/^.*=\s//'"
+  register: uuid_result
+# - set_fact:
+#    rundeck_server_uuid: "{{ lookup('ini', 'rundeck.server.uuid type=properties file=/etc/rundeck/framework.properties') }}"
+- debug: msg="{{ uuid_result }}"
 - name: Update framework.properties
   template:
     src: "../templates/etc/rundeck/framework.properties.j2"
