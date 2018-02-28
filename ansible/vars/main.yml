@@ -7,3 +7,5 @@ rundeckrepo:
   enabled: yes
 rundeckstore:
   defaultstorepassword: adminadmin
+rundeckdata:
+  defaultDataSourceUrl: jdbc:h2:file:/var/lib/rundeck/data/rundeckdb;MVCC=true

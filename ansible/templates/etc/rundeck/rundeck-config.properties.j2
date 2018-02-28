@@ -7,4 +7,5 @@ rss.enabled=false
 # change hostname here
 grails.serverURL=https://{{ ansible_fqdn }}:4443
 dataSource.dbCreate = update
-dataSource.url = jdbc:h2:file:/var/lib/rundeck/data/rundeckdb;MVCC=true
+dataSource.url = {{ rundeckdata.defaultDataSourceUrl }}
+# {% if 'rundeck-data' not in groups %}{{ rundeckdata.defaultDataSourceUrl }}{% else %}{{ groups['rundeck-data'][0] }}{%endif %}
