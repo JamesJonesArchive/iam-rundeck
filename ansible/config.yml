@@ -2,7 +2,6 @@
 - name: Generate random password
   shell: date +%s | sha256sum | base64 | head -c 32 ; echo
   register: random_result
-- debug: msg="{{ random_result.stdout }}"
 - set_fact:
     rundeck_key_password: "{{ random_result.stdout }}"
 - name: Remove keystore (if exists)
