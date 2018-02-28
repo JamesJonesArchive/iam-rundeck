@@ -50,7 +50,7 @@
   register: uuid_result
 # - set_fact:
 #    rundeck_server_uuid: "{{ lookup('ini', 'rundeck.server.uuid type=properties file=/etc/rundeck/framework.properties') }}"
-- debug: msg="{{ uuid_result }}"
+- debug: msg="{{ uuid_result.stdout }}"
 - name: Update framework.properties
   template:
     src: "../templates/etc/rundeck/framework.properties.j2"
