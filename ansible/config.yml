@@ -48,9 +48,12 @@
 - name: Get the uuid
   shell: sed '/^\#/d' /etc/rundeck/framework.properties | grep 'rundeck.server.uuid' | sed 's/^.*=\s//'
   register: uuid_result
+- name: Generate random password
+  shell: tr -cd '[:alnum:]' < /dev/urandom | fold -w30 | head -n1
+  register: random_result
 - set_fact:
     rundeck_server_uuid: "{{ uuid_result.stdout }}"
-- debug: msg="{{ rundeck_server_uuid }}"
+- debug: msg="{{ random_result }}"
 - name: Update framework.properties
   template:
     src: "../templates/etc/rundeck/framework.properties.j2"
