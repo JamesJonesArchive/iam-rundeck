@@ -34,6 +34,15 @@
   with_items:
     - /etc/rundeck/ssl/keystore
     - /etc/rundeck/ssl/truststore
+    
+- set_fact:
+    rundeck_jdbc_url: "{{ defaultDataSourceUrl }}"
+  when: "'rundeck-data' not in groups"
+- set_fact:
+    rundeck_jdbc_url: "jdbc:mysql://{{ groups['rundeck-data'][0] }}:{{ rundeck_db_port }}/{{ rundeck_db_dbname }}"
+  when: "'rundeck-data' in groups and rundeck_db_type = 'mysql'"
+    
+    
 - name: Update rundeck-config.properties
   template:
     src: "../templates/etc/rundeck/rundeck-config.properties.j2"
