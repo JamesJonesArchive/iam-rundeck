@@ -39,7 +39,7 @@
     rundeck_jdbc_url: "{{ defaultDataSourceUrl }}"
   when: "'rundeck-data' not in groups"
 - set_fact:
-    rundeck_jdbc_url: "jdbc:mysql://{{ groups['rundeck-data'][0] }}:{{ hostvars[groups['rundeck-data'][0]]['rundeck_db_port'] }}/{{ hostvars[groups['rundeck-data'][0]]['rundeck_db_dbname'] }}"
+    rundeck_jdbc_url: "jdbc:mysql://{{ groups['rundeck-data'][0] }}:{{ hostvars[groups['rundeck-data'][0]]['rundeck_db_port'] }}/{{ hostvars[groups['rundeck-data'][0]]['rundeck_db_dbname'] }}?autoReconnect=true"
   when: "'rundeck-data' in groups and hostvars[groups['rundeck-data'][0]]['rundeck_db_type'] | default('') == 'mysql'"
     
     
