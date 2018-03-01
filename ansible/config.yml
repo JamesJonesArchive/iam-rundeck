@@ -40,7 +40,7 @@
   when: "'rundeck-data' not in groups"
 - set_fact:
     rundeck_jdbc_url: "jdbc:mysql://{{ groups['rundeck-data'][0] }}:{{ rundeck_db_port }}/{{ rundeck_db_dbname }}"
-  when: "'rundeck-data' in groups and rundeck_db_type = 'mysql'"
+  when: "'rundeck-data' in groups and rundeck_db_type == 'mysql'"
     
     
 - name: Update rundeck-config.properties
