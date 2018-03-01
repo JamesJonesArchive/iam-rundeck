@@ -39,8 +39,8 @@
     rundeck_jdbc_url: "{{ defaultDataSourceUrl }}"
   when: "'rundeck-data' not in groups"
 - set_fact:
-    rundeck_jdbc_url: "jdbc:mysql://{{ groups['rundeck-data'][0] }}:{{ rundeck_db_port }}/{{ rundeck_db_dbname }}"
-  when: "'rundeck-data' in groups and rundeck_db_type == 'mysql'"
+    rundeck_jdbc_url: "jdbc:mysql://{{ groups['rundeck-data'][0] }}:{{ hostvars['rundeck-data'].rundeck_db_port }}/{{ hostvars['rundeck-data'].rundeck_db_dbname }}"
+  when: "'rundeck-data' in groups and hostvars['rundeck-data'].rundeck_db_type | default('') == 'mysql'"
     
     
 - name: Update rundeck-config.properties
