@@ -2,6 +2,11 @@
 - hosts: "{{ target_hosts }}"
   vars_files:
     - ./vars/main.yml
+  roles:
+    - { role: "common", tags: ["deploy"] }
+    - { role: 'repo-epel', tags: ["deploy"] }
+    - { role: 'nginx', tags: ["deploy"] }
+    - { role: 'certtool', tags: ["deploy"] }
   tasks:
     - name: Setup the RunDeck via YUM/DNF
       include_tasks: setup.yml
@@ -18,3 +23,24 @@
         enabled: yes
       tags:
         - deploy 
+    - name: Setup nginx host
+      include_tasks: nginx.yml
+      tags:
+        - deploy 
+    - name: create nginx config for rundeck
+      template:
+        src: "{{ playbook_dir }}/templates/nginx/shared/rundeck.conf.j2"
+        dest: "/etc/nginx/shared/rundeck.conf"
+        mode: 0644
+        backup: no
+      tags:
+        - deploy
+    - name: Enable and start nginx
+      service:
+        name: "{{ item}}"
+        enabled: yes
+        state: restarted
+      with_items:
+        - nginx
+      tags: 
+        - deploy
