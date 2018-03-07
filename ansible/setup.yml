@@ -17,4 +17,4 @@
 - name: install the latest version of rundeck
   package:
     name: rundeck
-    state: "{{ rundeck_version }}""
+    state: "{{ rundeck_version }}"
