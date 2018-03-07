@@ -11,3 +11,4 @@ rundeckdata:
   defaultDataSourceUrl: jdbc:h2:file:/var/lib/rundeck/data/rundeckdb;MVCC=true
 jdk_version: 1.7.0
 rundeck_version: 2.6.9-1
+rundeck_state: present

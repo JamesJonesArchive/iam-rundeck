@@ -16,5 +16,5 @@
     enabled: "{{ rundeckrepo.enabled }}"
 - name: install the latest version of rundeck
   package:
-    name: rundeck
-    state: "{{ rundeck_version }}"
+    name: "rundeck-{{ rundeck_version }}"
+    state: "{{ rundeck_state }}"
