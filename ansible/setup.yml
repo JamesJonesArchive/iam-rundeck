@@ -1,11 +1,11 @@
 ---
-- name: install jdk 8
+- name: install jdk
   package:
     name: "{{ item }}"
     state: latest
   with_items:
-    - java-1.8.0-openjdk
-    - java-1.8.0-openjdk-devel
+    - "java-{{ jdk_version }}-openjdk"
+    - "java-{{ jdk_version }}-openjdk-devel"
 - name: Add Rundeck Repo
   yum_repository:
     name: "{{ rundeckrepo.name }}"
@@ -17,4 +17,4 @@
 - name: install the latest version of rundeck
   package:
     name: rundeck
-    state: latest
+    state: "{{ rundeck_version }}""
