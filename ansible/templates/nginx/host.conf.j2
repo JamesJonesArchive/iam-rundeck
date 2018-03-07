@@ -27,7 +27,5 @@ server {
     add_header X-Frame-Options DENY;
     add_header X-Content-Type-Options nosniff;
     
-    access_log           /var/log/nginx/rundeck.log  main;
-
     include /etc/nginx/shared/*.conf;
 }
