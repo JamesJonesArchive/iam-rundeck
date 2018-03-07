@@ -2,7 +2,8 @@
 #  Listen on SSL for all requests
 #
 server {
-    listen       [::]:443;
+    # listen       [::]:443;
+    listen       443;
     server_name {% if load_balancer_host is defined %}{{ load_balancer_host + ' ' }}{%endif %}{{ ansible_fqdn }};
     keepalive_timeout    70;
 
