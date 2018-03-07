@@ -12,3 +12,4 @@ rundeckdata:
 jdk_version: 1.8.0
 rundeck_version: 2.6.9
 rundeck_state: present
+app_name: rundeck
